@@ -1,0 +1,76 @@
+<!-- landing.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Flight Tracker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1 class="display-4">Welcome to Fake Flight Tracker</h1>
+        <p class="lead">Track flights in real-time (well, almost!)</p>
+        <a href="/input/" class="btn btn-primary btn-lg">Track a Flight</a>
+    </div>
+</body>
+</html>
+
+<!-- input_page.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Tracking Code</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container mt-5 text-center">
+        <h2>Enter Your Flight Tracking Code</h2>
+        <form action="/track/" method="get">
+            <input type="text" name="code" class="form-control mt-3" placeholder="Enter tracking code" required>
+            <button type="submit" class="btn btn-success mt-3">Track Flight</button>
+        </form>
+    </div>
+</body>
+</html>
+
+<!-- tracking_page.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Tracking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Tracking Flight: {{ flight.flight_number }}</h2>
+        <p>Status: <strong>{{ flight.status }}</strong></p>
+        <p>Departure: {{ flight.departure }}</p>
+        <p>Arrival: {{ flight.arrival }}</p>
+        <p>Estimated Arrival Time: {{ flight.arrival_time }}</p>
+        <div id="map" style="width: 100%; height: 400px;"></div>
+        <script>
+            var flightPath = {{ flight.route | tojson }};
+            // JavaScript to render a simple map here (e.g., using Leaflet or Google Maps API)
+        </script>
+    </div>
+</body>
+</html>
+
+<!-- error.html -->
+
+<!-- styles.css -->
+body {
+    background-color: #f8f9fa;
+}
+.container {
+    max-width: 600px;
+    margin-top: 50px;
+}
