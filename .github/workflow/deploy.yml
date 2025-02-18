@@ -1,0 +1,30 @@
+name: Deploy FastAPI Application
+
+on:
+  push:
+    branches:
+      - main  # Triggers when pushing to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies with Poetry
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install
+
+      - name: Deploy to server
+        run: |
+          # Example for deploying to a server, update with actual deployment steps
+          ssh user@172.20.10.5 "cd /python/flight/flight-tracker && git pull && poetry install && uvicorn main:app --host 0.0.0.0 --port 8000"
